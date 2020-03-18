@@ -67,7 +67,7 @@ public class tictactoe {
         while(!game_over){
             System.out.println("Enter a move (PieceLocation ex. X3): ");
             move = sc.nextLine();
-            location = Integer.parseInt(move.substring(1));
+            location = Integer.parseInt(move.substring(1)) - 1;
             piece = move.charAt(0);
             board[location].occupant = piece;
             draw_board();
