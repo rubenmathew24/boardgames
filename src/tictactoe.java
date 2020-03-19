@@ -19,7 +19,8 @@ public class tictactoe {
     }
     public void draw_board(){
         short cursor = 1;
-
+        System.out.println();
+        
         for(Space s : board){
             if(s.occupant == '\u0000'){
                 if(cursor < 3){
@@ -72,6 +73,25 @@ public class tictactoe {
         System.out.print("_|_|_\n");
     }
 
+    private boolean checkGameOver() {
+    	boolean gameOver = false;
+    	
+    	//Checks Rows
+    	if(board[0].occupant != '\u0000' && board[0].occupant == board[1].occupant && board[0].occupant == board[2].occupant) return true;
+    	if(board[3].occupant != '\u0000' && board[3].occupant == board[4].occupant && board[3].occupant == board[5].occupant) return true;
+    	if(board[6].occupant != '\u0000' && board[6].occupant == board[7].occupant && board[6].occupant == board[8].occupant) return true;
+    	
+    	//Checks Columns
+    	if(board[0].occupant != '\u0000' && board[0].occupant == board[3].occupant && board[0].occupant == board[6].occupant) return true;
+    	if(board[1].occupant != '\u0000' && board[1].occupant == board[4].occupant && board[1].occupant == board[7].occupant) return true;
+    	if(board[2].occupant != '\u0000' && board[2].occupant == board[5].occupant && board[2].occupant == board[8].occupant) return true;
+    	
+    	//Checks Diagonals
+    	if(board[0].occupant != '\u0000' && board[0].occupant == board[4].occupant && board[0].occupant == board[8].occupant) return true;
+    	if(board[2].occupant != '\u0000' && board[2].occupant == board[4].occupant && board[2].occupant == board[6].occupant) return true;
+    	return gameOver;
+    }
+    
     public void game_loop(){
         boolean game_over = false, validInput = false;
         Scanner sc = new Scanner(System.in);
@@ -89,7 +109,9 @@ public class tictactoe {
             piece = move.charAt(0);
             board[location].occupant = piece;
             draw_board();
+            game_over = checkGameOver();
         }
+        System.out.println("Game Over: \'"+ piece + "\' wins");
     }
 
     public static void main(String[] args) {
